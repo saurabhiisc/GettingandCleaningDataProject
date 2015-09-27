@@ -1,5 +1,6 @@
 ## Data 
 The dataset is from “Human Activity Recognition Using Smartphones Data Set”
+
 Data description is available at:
 http://archive.ics.uci.edu/ml/datasets/Human+Activity+Recognition+Using+Smartphones
 
