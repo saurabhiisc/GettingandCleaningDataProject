@@ -1,6 +1,6 @@
 library(dplyr)
+library(data.table)
 
-setwd("C:/Users/sagarg/Desktop/Coursera/Cleaning Data/")
 url <- "https://d396qusza40orc.cloudfront.net/getdata%2Fprojectfiles%2FUCI%20HAR%20Dataset.zip"
 download.file(url, "courseprojectdata.zip")
 unzip(zipfile = "courseprojectdata.zip")
@@ -67,18 +67,14 @@ colnames(data) <- gsub("BodyBody", "Body", colnames(data))
 colnames(data)
 
 
-
-
 # 5. From the data set in step 4, creates a second, independent tidy data set with the 
 # average of each variable for each activity and each subject.
 dataTidy <-  aggregate(. ~subject + activity, data, mean)
 dataTidy <- dataTidy[order(dataTidy$subject,dataTidy$activity),]
 
 # It can also be done using "%>%" operator fro dplyr package
-dataTidy1 <-  data %>% group_by(subject, activity) %>% summarise_each(funs(mean))
+dataTidy <-  data %>% group_by(subject, activity) %>% summarise_each(funs(mean))
 
-# Check is both datasets are identical
-table(dataTidy1 == dataTidy)
-
+setwd("..")
 write.table(dataTidy1, file="dataTidy.txt", row.names=FALSE)
 
